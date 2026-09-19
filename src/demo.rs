@@ -876,6 +876,9 @@ pub fn apply_flags(app: &mut App, page: Option<&str>) {
                 app.scroll_to_bottom = true;
             }
             "settings" => app.page = Page::Settings,
+            choice if choice.starts_with("font=") => {
+                app.settings.font_family = choice.strip_prefix("font=").map(str::to_owned);
+            }
             "omarchy" | "omarchy-light" => {
                 let mut themes: Vec<_> = crate::theme::presets::themes().collect();
                 let filename = if part == "omarchy-light" {
@@ -1307,6 +1310,17 @@ mod tests {
             // Headless tests must apply font-atlas updates themselves.
             output.textures_delta.clear();
         }
+    }
+
+    #[test]
+    fn missing_custom_font_keeps_settings_and_messages_renderable() {
+        let mut app = app();
+        apply_flags(&mut app, Some("settings,font=Missing fixture font"));
+        let ctx = egui::Context::default();
+        app.attach(&ctx);
+        render(&mut app, &ctx);
+        app.page = Page::Chats;
+        render(&mut app, &ctx);
     }
 
     #[test]
