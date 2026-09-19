@@ -104,7 +104,7 @@ pub fn show(app: &mut App, ui: &mut egui::Ui) {
                                     }
                                     let query = app.font_search.trim().to_lowercase();
                                     let mut matches = 0;
-                                    for family in crate::system_fonts::families().filter(|name| name.to_lowercase().contains(&query)) {
+                                    for family in crate::system_fonts::families().filter(|name| query.is_empty() || name.to_lowercase().contains(&query)) {
                                         matches += 1;
                                         if theme_option(ui, &palette, family, app.settings.font_family.as_deref() == Some(family)) {
                                             app.actions.push(Action::SetFont(Some(family.to_owned())));

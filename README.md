@@ -382,6 +382,7 @@ For deterministic theme screenshots, `--demo-page settings,omarchy` and
 `--demo-page settings,omarchy-light` preview following dark and light Omarchy
 palettes without changing the desktop theme. Add `font=Family Name` to preview
 an installed font, for example `--demo-page "settings,font=Noto Serif"`.
+An empty or whitespace-only `font=` value restores Inter (default).
 
 On Omarchy, run `omarchy screenrecord`, select the demo window, then press Space
 in ZapFast. Recording has no audio unless you explicitly enable desktop or

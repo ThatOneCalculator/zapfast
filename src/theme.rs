@@ -165,9 +165,9 @@ pub fn bold(size: f32) -> egui::FontId {
     egui::FontId::new(size, egui::FontFamily::Name(INTER_BOLD.into()))
 }
 
-/// Installs fonts, icons, and base style.
-pub fn install(ctx: &egui::Context) {
-    install_fonts(ctx, None);
+/// Installs the selected fonts, icons, and image loaders.
+pub fn install(ctx: &egui::Context, selected: Option<&str>) {
+    install_fonts(ctx, selected);
     register_icons(ctx);
     egui_extras::install_image_loaders(ctx);
 }
